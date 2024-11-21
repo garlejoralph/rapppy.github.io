@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/payment.css">
+    <title>Select Payment Method</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Method</h1>
+        
+        <!-- Display selected product and total price -->
+        <div id="order-summary">
+            <h2>Your Order:</h2>
+            <p id="product-name"></p>
+            <p>Total: ₱<span id="product-price"></span></p>
+        </div>
+        
+        <!-- Payment Method Selection -->
+        <div class="payment-options">
+            <h3>Select Payment Method</h3>
+            <form id="payment-form">
+                <label>
+                    <input type="radio" name="payment-method" value="gcash" required> GCash
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="payment-method" value="paymaya" required> PayMaya
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="payment-method" value="cod" required> Cash on Delivery (COD)
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="payment-method" value="credit-card" required> Credit Card
+                </label>
+                <br>
+                <button type="submit">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve product details from localStorage
+        const productName = localStorage.getItem('productName');
+        const productPrice = parseFloat(localStorage.getItem('productPrice')).toFixed(2);
+
+        // Update the order summary
+        document.getElementById('product-name').textContent = productName;
+        document.getElementById('product-price').textContent = productPrice;
+
+        // Handle form submission (for demo purposes, just alert the selection)
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from reloading the page
+            
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked');
+            if (paymentMethod) {
+                alert('You selected ' + paymentMethod.value + ' as your payment method.');
+                // You can redirect to a confirmation page or process the payment
+            } else {
+                alert('Please select a payment method.');
+            }
+        });
+    </script>
+</body>
+</html>
